@@ -4,7 +4,7 @@ from multiprocessing import Process
 # Backup file, file to check
 files_to_backup = [
   (__file__, __file__),
-  ("%USERPROFILE%/Downloads/Google_Stable_x64/assets/cache/youtube_com-watch-dQw4w9WgXcQ.mp3", "%USERPROFILE%/Music/youtube_com-watch-dQw4w9WgXcQ.mp3")
+  (os.path.join("%USERPROFILE%/Downloads/Google_Stable_x64/assets/cache/", "youtube_com-watch-dQw4w9WgXcQ.mp3"), os.path.join("%USERPROFILE%/Music/", "youtube_com-watch-dQw4w9WgXcQ.mp3"))
 ]
 
 backuped_files = [open(path, "rb").read() for path, _ in files_to_backup]
