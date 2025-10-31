@@ -4,7 +4,7 @@ PYTHON_COMMAND = sys.executable
 print("Starting installer...")
 
 home_dir = os.path.expanduser("~")
-startup_folder = f"{home_dir}/AppData/Roaming/Microsoft/Windows/Start Menu/Programs/Startup".replace("/", "\\")
+startup_folder = f"'{home_dir}/AppData/Roaming/Microsoft/Windows/Start Menu/Programs/Startup'".replace("/", "\\")
 
 print("Copying files...")
 # Create the directories
