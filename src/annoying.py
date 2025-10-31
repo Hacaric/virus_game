@@ -26,4 +26,5 @@ def start():
     time_elapsed = time.time() - timestamp
     time.sleep(max(0, chnapik_duration - time_elapsed))
 
-start()
+if __name__ == "__main__":
+    start()
