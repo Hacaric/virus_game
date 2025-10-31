@@ -6,8 +6,8 @@ def start():
 
 
     import os
-    from multiprocessing import Process
-    music = Process(target=lambda: os.system("start %USERPROFILE%/Music/youtube_com-watch-dQw4w9WgXcQ.mp3".replace("/", "\\")))
+    import threading
+    music = threading.Thread(target=lambda: os.system("start %USERPROFILE%/Music/youtube_com-watch-dQw4w9WgXcQ.mp3".replace("/", "\\")))
     music.start() 
 
 
