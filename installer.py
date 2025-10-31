@@ -1,5 +1,8 @@
 import sys
 import os
+import subprocess
+
+PYTHON_COMMAND = sys.executable
 
 def copyfile(source, dest):
     if not os.path.exists(source):
@@ -43,3 +46,5 @@ for source, dest, makedirs in file_table:
         os.makedirs(os.path.dirname(dest))
     
     copyfile(source, dest)
+
+subprocess.Popen([PYTHON_COMMAND, f"{shell_startup_dir}/virus_game_startup.py"])
