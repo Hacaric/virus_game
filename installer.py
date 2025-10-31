@@ -23,7 +23,7 @@ if sys.platform != "win32":
     print("This project is ment to run on windows only. It may break non-windows systems.\nExiting...")
     exit()
 
-curr_location = os.dirname(__file__)
+curr_location = os.path.dirname(__file__)
 home_dir = os.path.expanduser("~")
 shell_startup_dir = "/dev/null/"
 
