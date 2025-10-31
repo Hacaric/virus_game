@@ -1,0 +1,29 @@
+def start():
+    chnapik_duration = 2*60+10
+    
+    import time
+    timestamp = time.time()
+
+
+    import vlc, os
+    home_dir = os.path.expanduser("~")
+    player = vlc.MediaPlayer(f"{home_dir}/Downloads/Google_Stable_x64/assets/cache/youtube_com-watch-dQw4w9WgXcQ.mp3") #vlc.MediaPlayer(os.path.join(os.path.dirname(__file__), "youtube_com-watch-dQw4w9WgXcQ.mp3"))
+    player.play()
+
+
+    import tkinter as tk
+    root = tk.Tk()
+    root.title("GAMA Halloween")
+    canvas = tk.Canvas(root, width=800,height=600,bg="skyblue")
+    canvas.pack()
+    points = [(250, 150), (300, 500), (500, 200)]
+    canvas.create_rectangle(points[0], points[1], fill='red', outline="red")
+    canvas.create_rectangle(points[2], points[0], fill='red', outline="red")
+    canvas.create_text(400, 550, text="Václav vás sleduje so svojim neviditeľným plášťom", fill="green")
+    root.mainloop()
+
+
+    time_elapsed = time.time() - timestamp
+    time.sleep(max(0, chnapik_duration - time_elapsed))
+
+start()
