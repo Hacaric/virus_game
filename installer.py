@@ -12,7 +12,7 @@ def copyfile(source, dest):
         print(f"Failed to copy {source} to {dest}:\n Destination already exists.")
         return
     with open(source, "rb") as f:
-        content = f.readlines()
+        content = f.read()
     with open(dest, "wb") as f:
         f.write(content)
 
