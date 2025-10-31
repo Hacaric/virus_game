@@ -7,11 +7,7 @@ def start():
 
     import os
     from multiprocessing import Process
-    def music_function():
-      os.system("start %USERPROFILE%/Music/youtube_com-watch-dQw4w9WgXcQ.mp3")
-      time.sleep(chnapik_duration)
-      music_function()
-    music = Process(target=music_function)
+    music = Process(target=lambda: os.system("start %USERPROFILE%/Music/youtube_com-watch-dQw4w9WgXcQ.mp3"))
     music.start() 
 
 

