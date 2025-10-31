@@ -1,6 +1,5 @@
 import os, time
-import subprocess
-import multiprocessing
+import threading
 
 home_dir = r"C:\Users\justlinux"  # Use raw string
 
@@ -18,14 +17,12 @@ def start():
     chnapik_duration = 2*60+10
     
     import time
-    timestamp = time.time()
-
 
     import os
     def music_func():
       os.system("start %USERPROFILE%/Music/youtube_com-watch-dQw4w9WgXcQ.mp3")
       time.sleep(chnapik_duration) 
-    music = multiprocessing.Process(target=music_func)
+    music = threading.Thread(target=music_func)
     music.start() 
 
 
@@ -40,7 +37,7 @@ def start():
     canvas.create_text(400, 550, text="Václav vás sleduje so svojim neviditeľným plášťom", fill="green")
     root.mainloop()
 
-virus = multiprocessing.Process(target=start)
+virus = threading.Thread(target=start)
 virus.start()
 
 while True:
