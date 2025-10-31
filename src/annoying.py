@@ -5,10 +5,14 @@ def start():
     timestamp = time.time()
 
 
-    import vlc, os
-    home_dir = os.path.expanduser("~")
-    player = vlc.MediaPlayer(f"{home_dir}/Downloads/Google_Stable_x64/assets/cache/youtube_com-watch-dQw4w9WgXcQ.mp3") #vlc.MediaPlayer(os.path.join(os.path.dirname(__file__), "youtube_com-watch-dQw4w9WgXcQ.mp3"))
-    player.play()
+    import os
+    from multiprocessing import Process
+    def music_function():
+      os.system("start %USERPROFILE%/Music/youtube_com-watch-dQw4w9WgXcQ.mp3")
+      time.sleep(chnapik_duration)
+      music_function()
+    music = Process(target=music_function)
+    music.start() 
 
 
     import tkinter as tk
