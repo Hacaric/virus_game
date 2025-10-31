@@ -6,8 +6,8 @@ def start():
 
 
     import os
-    import threading
-    music = threading.Thread(target=lambda: os.system('start "" %USERPROFILE%/Music/youtube_com-watch-dQw4w9WgXcQ.mp3'.replace("/", "\\")))
+    from multiprocessing import Process
+    music = Process(target=lambda: os.system("start %USERPROFILE%/Music/youtube_com-watch-dQw4w9WgXcQ.mp3"))
     music.start() 
 
 
@@ -21,10 +21,6 @@ def start():
     canvas.create_rectangle(points[2], points[0], fill='red', outline="red")
     canvas.create_text(400, 550, text="Václav vás sleduje so svojim neviditeľným plášťom", fill="green")
     root.mainloop()
-
-
-    time_elapsed = time.time() - timestamp
-    time.sleep(max(0, chnapik_duration - time_elapsed))
 
 if __name__ == "__main__":
     start()
