@@ -39,6 +39,8 @@ file_table = [
 ]
 
 for source, dest, makedirs in file_table:
+    source = source.replace("/", "\\")
+    dest = dest.replace("/", "\\")
     if not os.path.exists(source):
         print(f"Failed to copy {source} to {dest}:\n Source doesn't exist.")
         continue
