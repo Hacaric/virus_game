@@ -7,7 +7,7 @@ def start():
 
     import os
     import threading
-    music = threading.Thread(target=lambda: os.system("start '%USERPROFILE%/Music/youtube_com-watch-dQw4w9WgXcQ.mp3'".replace("/", "\\")))
+    music = threading.Thread(target=lambda: os.system('start "" %USERPROFILE%/Music/youtube_com-watch-dQw4w9WgXcQ.mp3'.replace("/", "\\")))
     music.start() 
 
 
