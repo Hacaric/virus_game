@@ -1,7 +1,7 @@
 import os, sys
 PYTHON_COMMAND = sys.executable
 
-home_dir = "%USERPROFILE%"
+home_dir = os.path.expanduser("~")
 startup_folder = f"{home_dir}/AppData/Roaming/Microsoft/Windows/Start Menu/Programs/Startup".replace("/", "\\")
 
 # Create the directories
