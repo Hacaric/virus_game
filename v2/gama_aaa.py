@@ -20,21 +20,26 @@ def log_to_discord(msg:str):
 log_to_discord("Annoying file...")
         
 def open_window(delay = 0):
+    
     global timestamp
     time.sleep(delay)
     log_to_discord(f"Opening window... (part1)")
     log_to_discord(f"Opening window...\n{time.time() - timestamp}s from start. (part2)")
     import tkinter as tk
-    root = tk.Tk()
-    root.title("GAMA Halloween")
-    canvas = tk.Canvas(root, width=800,height=600,bg="skyblue")
-    canvas.pack()
-    points = [(250, 150), (300, 500), (500, 200)]
-    canvas.create_rectangle(points[0], points[1], fill='red', outline="red")
-    canvas.create_rectangle(points[2], points[0], fill='red', outline="red")
-    canvas.create_text(400, 550, text="Ak sa chcete zbaviť tohto okna, napíšte nám básničku do súboru v Desktop/vzdavam_sa.txt (aspoň jedna strofa).", fill="green")
-    root.bind("<Destroy>", lambda event: open_window(delay = 60))
-    root.mainloop()
+    def create_and_run_window():
+        root = tk.Tk()
+        root.title("GAMA Halloween")
+        canvas = tk.Canvas(root, width=800,height=600,bg="skyblue")
+        canvas.pack()
+        points = [(250, 150), (300, 500), (500, 200)]
+        canvas.create_rectangle(points[0], points[1], fill='red', outline="red")
+        canvas.create_rectangle(points[2], points[0], fill='red', outline="red")
+        canvas.create_text(400, 550, text="Ak sa chcete zbaviť tohto okna, napíšte nám básničku do súboru v Desktop/vzdavam_sa.txt (aspoň jedna strofa).", fill="green")
+        root.protocol("WM_DELETE_WINDOW", lambda: root.destroy()) # Allow proper closure
+        root.mainloop()
+        # After the window is closed, schedule a new one to open after delay
+        threading.Timer(60, open_window).start()
+    create_and_run_window()
 
 # def start():
 chnapik_duration = 2*60+10
