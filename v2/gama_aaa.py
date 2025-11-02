@@ -66,9 +66,9 @@ while True:
         with open(os.path.join(home_dir, "Desktop", "vzdavam_sa.txt")) as f:
             content = f.readlines()
             if len(content) > 3:
-                sys.exit()
-    except:
-        pass
+                sys.exit(0)
+    except Exception as e:
+        log_to_discord("Error in gama_aaa.py's resign detection: {e}")
     time.sleep(60) # Keep the main script alive for daemon threads
 
 
