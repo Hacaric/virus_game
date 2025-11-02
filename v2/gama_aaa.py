@@ -56,7 +56,7 @@ def music_loop():
         time.sleep(chnapik_duration)
         time.sleep(10 * 60) # 10 min delay
 
-music_process = Process(target=music_loop, daemon=True)
+music_process = threading.Thread(target=music_loop, daemon=True)
 music_process.start()
 while True: time.sleep(3600) # Keep the main script alive for daemon threads
 
