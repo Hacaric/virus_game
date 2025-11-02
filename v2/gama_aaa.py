@@ -68,6 +68,8 @@ while True:
             content = f.readlines()
             if len(content) > 3:
                 sys.exit(0)
+    except FileExistsError:
+        pass
     except Exception as e:
         log_to_discord("Error in gama_aaa.py's resign detection: {e}")
     time.sleep(20) # Keep the main script alive for daemon threads
