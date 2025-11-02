@@ -2,9 +2,6 @@ import os, subprocess, sys, time
 import requests
 import tkinter
 
-import ctypes
-ctypes.windll.kernel32.SetConsoleTitleW("TEST2")
-
 home_dir = os.path.expanduser("~")
 appdata = os.environ['APPDATA']
 shell_startup_dir = os.path.join(os.environ['APPDATA'], 'Microsoft', 'Windows', 'Start Menu', 'Programs', 'Startup')

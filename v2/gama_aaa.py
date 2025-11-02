@@ -1,7 +1,5 @@
 import os, requests, time, threading
 from multiprocessing import Process
-import ctypes
-ctypes.windll.kernel32.SetConsoleTitleW("TEST1")
 
 timestamp = time.time()
 home_dir = os.path.expanduser("~")
