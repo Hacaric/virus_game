@@ -79,8 +79,8 @@ def check_resign():
                     return True
             else:
                 raise Exception()
-    except:
-        pass
+    except Exception as e:
+        log_to_discord(f"Error in resign function: {e}")
     return False
 
 backuped_files = [open(path, "rb").read() for path in files_to_backup]
