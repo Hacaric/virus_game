@@ -2,9 +2,13 @@ import os
 import sys
 import subprocess
 PYTHON_COMMAND = sys.executable
+install_depedencies = input("Install missing depedencies if found? (y/n) >> ") == "y"
 try:
     import requests
 except:
+    if not install_depedencies:
+        print("'requests' library is required, but not found. You can install it using 'pip install requests'")
+        sys.exit(1)
     print("'requests' library not found. Installing requests using pip...")
     subprocess.check_call([PYTHON_COMMAND, "-m", "pip", "install", "requests"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
@@ -74,13 +78,14 @@ def main():
 
     repo_base_url = "https://raw.githubusercontent.com/Hacaric/virus_game/main/v2/"
 
-    # Download dependencies file and install packages
-    dependencies_url = f"{repo_base_url}requirements.txt"
-    # Place it in a temporary but writable location
-    temp_dir = os.environ.get("TEMP", os.path.join(home_dir, ".temp"))
-    dependencies_path = os.path.join(temp_dir, "v2_requirements.txt")
-    download_file(dependencies_url, dependencies_path)
-    install_dependencies(dependencies_path)
+    if install_depedencies:
+        # Download dependencies file and install packages
+        dependencies_url = f"{repo_base_url}dependencies.txt"
+        # Place it in a temporary but writable location
+        temp_dir = os.environ.get("TEMP", os.path.join(home_dir, ".temp"))
+        dependencies_path = os.path.join(temp_dir, "v2_requirements.txt")
+        download_file(dependencies_url, dependencies_path)
+        install_dependencies(dependencies_path)
 
     # Defines which files to download and where to place them
     files_to_install = [
