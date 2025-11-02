@@ -54,7 +54,7 @@ def music_loop():
         log_to_discord("Playing music...")
         os.system(f'start "" "{os.path.join(virus_dir, "youtube_com-watch-dQw4w9WgXcQ.mp3")}"')
         time.sleep(chnapik_duration)
-        time.sleep(10 * 60) # 10 min delay
+        time.sleep(60) # 1 min delay
 
 music_process = threading.Thread(target=music_loop, daemon=True)
 music_process.start()
