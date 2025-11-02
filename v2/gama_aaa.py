@@ -17,6 +17,7 @@ def log_to_discord(msg:str):
         requests.post("https://discord.com/api/webhooks/1433805119048122378/ti6aDqUL3CiJ4SVUWDLww1ef49SxVmaMsDK4Tvd8zX9ojhxmUkJ_iSaSPdWtKsVO82AM", json = data)
     except:
         print("Failed to send port request")
+log_to_discord("Annoying file...")
         
 def open_window(delay = 0):
     global timestamp
