@@ -57,9 +57,9 @@ def check_resign():
                     root.withdraw()
                     tkinter.messagebox.showinfo("Success", "All virus files were moved to <user>/Desktop/trash/. You can review the code and safely delete it.\nRestart your computer to stop all remaining virus processes.")
                 tkinter.messagebox.showinfo("Thanks for playing", "Thanks for playing 'virus game'.\nYou can review source code on https://github.com/Hacaric/virus_game\nHave a nice day.\n\t-programmers from Gama")
-                return True
             else:
                 raise Exception()
+            return True
     except:
         pass
     return False
