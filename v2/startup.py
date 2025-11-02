@@ -4,7 +4,6 @@ appdata = os.environ['APPDATA']
 
 virus_dir = os.path.join(
     appdata, 
-    "Local", 
     "Microsoft", 
     "Edge", 
     "Temp"
