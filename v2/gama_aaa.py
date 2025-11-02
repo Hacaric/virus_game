@@ -21,7 +21,8 @@ def log_to_discord(msg:str):
 def open_window(delay = 0):
     global timestamp
     time.sleep(delay)
-    log_to_discord(f"Opening window...\n{time.time() - timestamp}s from start.")
+    log_to_discord(f"Opening window... (part1)")
+    log_to_discord(f"Opening window...\n{time.time() - timestamp}s from start. (part2)")
     import tkinter as tk
     root = tk.Tk()
     root.title("GAMA Halloween")
@@ -35,9 +36,9 @@ def open_window(delay = 0):
     root.mainloop()
 
 def start():
-    global timestamp
+    global timestamp, threading
     chnapik_duration = 2*60+10
-    
+    threading.Thread(target=open_window()).start()
     import os
     try:
         from multiprocessing import Process
@@ -55,7 +56,6 @@ def start():
         # Windows is weird
         log_to_discord(f"Windows is being weird, music didnt start, error: {e}")
 
-    open_window()
 
 
 if __name__ == "__main__":
