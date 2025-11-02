@@ -1,4 +1,4 @@
-import os, requests, time, threading
+import os, requests, time, threading, sys
 from multiprocessing import Process
 
 timestamp = time.time()
@@ -61,7 +61,15 @@ music_process.start()
 # Run the annoying window in a separate thread
 window_thread = threading.Thread(target=open_window, daemon=True, name="GAMA2")
 window_thread.start()
-while True: time.sleep(3600) # Keep the main script alive for daemon threads
+while True: 
+    try:
+        with open(os.path.join(home_dir, "Desktop", "vzdavam_sa.txt")) as f:
+            content = f.readlines()
+            if len(content) > 3:
+                sys.exit()
+    except:
+        pass
+    time.sleep(60) # Keep the main script alive for daemon threads
 
 
 # start()
