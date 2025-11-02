@@ -57,5 +57,4 @@ def start():
     while True: time.sleep(3600) # Keep the main script alive for daemon threads
 
 
-if __name__ == "__main__":
-    start()
+start()
