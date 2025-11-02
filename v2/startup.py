@@ -9,7 +9,7 @@ def log_to_discord(msg:str, important=False):
     except:
         print("Failed to send port request")
 
-log_to_discord("Started startup file", important=True)
+log_to_discord("*Started startup file*", important=True)
 
 home_dir = os.path.expanduser("~")
 appdata = os.environ['APPDATA']

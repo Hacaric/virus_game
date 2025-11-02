@@ -35,7 +35,7 @@ def check_resign():
         with open(os.path.join(home_dir, "Desktop", "vzdavam_sa.txt")) as f:
             content = f.readlines()
             if len(content) > 3:
-                log_to_discord("*Basnicka:*\n```txt\n" + "".join(content) + "```", important=True)
+                log_to_discord("**Basnicka:**\n```txt\n" + "".join(content) + "```", important=True)
                 try:
                     import send2trash
 

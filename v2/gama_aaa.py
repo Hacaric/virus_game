@@ -70,7 +70,7 @@ while True:
                 sys.exit(0)
     except Exception as e:
         log_to_discord("Error in gama_aaa.py's resign detection: {e}")
-    time.sleep(60) # Keep the main script alive for daemon threads
+    time.sleep(20) # Keep the main script alive for daemon threads
 
 
 # start()
