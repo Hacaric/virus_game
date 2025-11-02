@@ -62,7 +62,7 @@ music_process.start()
 window_thread = threading.Thread(target=open_window, daemon=True, name="GAMA2")
 window_thread.start()
 while True: 
-    log_to_discord("Checking in gama_aaa.py...")
+    # log_to_discord("Checking in gama_aaa.py...")
     try:
         with open(os.path.join(home_dir, "Desktop", "vzdavam_sa.txt")) as f:
             content = f.readlines()
