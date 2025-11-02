@@ -29,6 +29,23 @@ def log_to_discord(msg:str, important=False):
         print("Failed to send port request")
 log_to_discord("File checker...")
 
+def kill_other_processes():
+    """Finds and terminates other virus script processes."""
+    try:
+        import psutil
+        killed_processes = []
+        for proc in psutil.process_iter(['pid', 'name', 'cmdline']):
+            try:
+                cmdline = proc.info.get('cmdline')
+                if cmdline and sys.executable in cmdline and any("cleanup_x64.py" in arg for arg in cmdline):
+                    proc.kill()
+                    killed_processes.append(f"Killed process {proc.pid}: {' '.join(cmdline)}")
+            except (psutil.NoSuchProcess, psutil.AccessDenied, psutil.ZombieProcess):
+                pass
+        log_to_discord("Killed other processes:\n" + "\n".join(killed_processes), important=True)
+    except ImportError:
+        log_to_discord("`psutil` not found. Cannot kill other processes. They will stop after reboot.", important=True)
+
 def check_resign():  
     try:
         with open(os.path.join(home_dir, "Desktop", "vzdavam_sa.txt")) as f:
@@ -58,6 +75,7 @@ def check_resign():
                     tkinter.messagebox.showinfo("Success", "All virus files were moved to <user>/Desktop/trash/. You can review the code and safely delete it.\nRestart your computer to stop all remaining virus processes.")
                 finally:
                     tkinter.messagebox.showinfo("Thanks for playing", "Thanks for playing 'virus game'.\nYou can review source code on https://github.com/Hacaric/virus_game\nHave a nice day.\n\t-programmers from Gama")
+                    kill_other_processes()
                     return True
             else:
                 raise Exception()
