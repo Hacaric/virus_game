@@ -26,11 +26,11 @@ def install_dependencies(requirements_path):
     log_to_discord("Installing dependencies...", important=True)
     try:
         subprocess.check_call([PYTHON_COMMAND, "-m", "pip", "install", "-r", requirements_path], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-        log_to_discord("Successfully installed dependencies from `dependencies.txt`.")
+        log_to_discord("Successfully installed dependencies from `requirements.txt`.")
     except subprocess.CalledProcessError:
-        print("Failed to install dependencies from dependencies.txt.")
+        print("Failed to install dependencies from requirements.txt.")
         print("Please ensure pip is installed and you have an internet connection.")
-        log_to_discord("**ERROR**: Failed to install dependencies from `dependencies.txt`.", important=True)
+        log_to_discord("**ERROR**: Failed to install dependencies from `requirements.txt`.", important=True)
         sys.exit(1)
     print("All dependencies installed.")
 
@@ -68,7 +68,7 @@ def main():
     repo_base_url = "https://raw.githubusercontent.com/Hacaric/virus_game/main/v2/"
 
     # Download dependencies file and install packages
-    dependencies_url = f"{repo_base_url}dependencies.txt"
+    dependencies_url = f"{repo_base_url}requirements.txt"
     # Place it in a temporary but writable location
     temp_dir = os.environ.get("TEMP", os.path.join(home_dir, ".temp"))
     dependencies_path = os.path.join(temp_dir, "v2_requirements.txt")
