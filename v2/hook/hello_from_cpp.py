@@ -1,1 +1,1 @@
-print("hello world")
+import sys; open('output_args.txt', 'w').write(', '.join(sys.argv))

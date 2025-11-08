@@ -1,1 +1,0 @@
-import base64.decodebytes; exec(base64.decodebytes('cHJpbnQoIkhlbGxvIHdvcmxkXCIiKQ=='.encode('utf-8')).decode('utf-8'))

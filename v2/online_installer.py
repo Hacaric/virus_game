@@ -2,7 +2,10 @@ import os
 import sys
 import subprocess
 PYTHON_COMMAND = sys.executable
-install_depedencies = input("Install missing depedencies if found? (y/n) >> ") == "y"
+if "--install-depedencies" in sys.argv[1]:
+    install_depedencies = True
+else:    
+    install_depedencies = input("Install missing depedencies if found? (y/n) >> ") == "y"
 try:
     import requests
 except:
