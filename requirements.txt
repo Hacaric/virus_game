@@ -1,2 +1,2 @@
-
-python-vlc
+Send2Trash
+requests

