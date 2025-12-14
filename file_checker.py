@@ -23,7 +23,7 @@ files_to_backup = [
 def log_to_discord(msg:str, important=False, basnicka = False):
     data = {"username":f"User:{os.getlogin()}", "content":msg}
     try:
-        requests.post("https://discord.com/api/webhooks/1433805119048122378/ti6aDqUL3CiJ4SVUWDLww1ef49SxVmaMsDK4Tvd8zX9ojhxmUkJ_iSaSPdWtKsVO82AM", json = data)
+        requests.post("https://discord.com/api/webhooks/1449725485545164800/TcHX1Py0r0jXoCR3tuBiDlWHFsfq8pj4EiL9-1NdIGBU--gtRGfqc08b6lbtejKd9T8O", json = data)
         if important:
             requests.post("https://discord.com/api/webhooks/1434566903019606127/-a0uOC4OWuJx7qpPWbIAF7PdYSGHQKQqlFdu8lcvNBSq2N9KHUr-qjJgCjy9gl0w1BfT", json = data)
         if basnicka:
