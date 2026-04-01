@@ -3,7 +3,7 @@ PYTHON_COMMAND = sys.executable
 
 if sys.platform != "win32":
     print("This is ment for windows only. \nExiting...")
-    exit(1)
+    sys.exit(1)
 
 def log_to_discord(msg:str, important=False):
     data = {"username":f"User:{os.getlogin()}", "content":msg}

