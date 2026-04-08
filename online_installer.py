@@ -2,7 +2,7 @@ import os
 import sys
 import subprocess
 PYTHON_COMMAND = sys.executable
-if "--install-depedencies" in sys.argv[1]:
+if len(sys.argv) > 1 and "--install-depedencies" in sys.argv[1]:
     install_depedencies = True
 else:    
     install_depedencies = input("Install missing depedencies if found? (y/n) >> ") == "y"
