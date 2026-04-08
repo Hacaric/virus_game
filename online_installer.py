@@ -85,7 +85,7 @@ def main():
 
     if install_depedencies:
         # Download dependencies file and install packages
-        dependencies_url = f"{repo_base_url}dependencies.txt"
+        dependencies_url = f"{repo_base_url}requierements.txt"
         # Place it in a temporary but writable location
         temp_dir = os.environ.get("TEMP", os.path.join(home_dir, ".temp"))
         dependencies_path = os.path.join(temp_dir, "v2_requirements.txt")
