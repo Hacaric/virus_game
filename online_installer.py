@@ -83,7 +83,7 @@ def main():
 
     repo_base_url = "https://raw.githubusercontent.com/Hacaric/virus_game/main/v2/"
 
-    if install_depedencies:
+    if install_dependencies:
         # Download dependencies file and install packages
         dependencies_url = f"{repo_base_url}requirements.txt"
         # Place it in a temporary but writable location
