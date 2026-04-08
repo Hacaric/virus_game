@@ -2,14 +2,14 @@ import os
 import sys
 import subprocess
 PYTHON_COMMAND = sys.executable
-if len(sys.argv) > 1 and "--install-depedencies" in sys.argv[1]:
-    install_depedencies = True
+if len(sys.argv) > 1 and "--install-dependencies" in sys.argv[1]:
+    install_dependencies = True
 else:    
-    install_depedencies = input("Install missing depedencies if found? (y/n) >> ") == "y"
+    install_dependencies = input("Install missing dependencies if found? (y/n) >> ") == "y"
 try:
     import requests
 except:
-    if not install_depedencies:
+    if not install_dependencies:
         print("'requests' library is required, but not found. You can install it using 'pip install requests'")
         sys.exit(1)
     print("'requests' library not found. Installing requests using pip...")
